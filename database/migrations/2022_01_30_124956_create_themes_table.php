@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContentsTable extends Migration
+class CreateThemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('themes', function (Blueprint $table) {
             $table->id();
-            $table->string('theme',10);
-            $table->string('title', 100);
-            $table->string('img', 100);
-            $table->string('video', 100);
-            $table->bigInteger('view');
-            $table->text('desc');
+            $table->string('title_thm', 100);
+            $table->string('img_thm', 100);
+            $table->text('desc_thm');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('themes');
     }
 }

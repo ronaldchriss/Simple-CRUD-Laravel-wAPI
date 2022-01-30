@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Content extends Model
+class React extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'theme',
-        'title',
-        'img',
-        'video',
-        'view',
-        'desc',
+        'content',
+        'review'
     ];
 }
