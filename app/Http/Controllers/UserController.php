@@ -53,11 +53,10 @@ class UserController extends Controller
             return response()->json([
                 'error' => true
             ]);
-        } else {
-            return response()->json([
-                'error' => false
-            ]);
         }
+        return response()->json([
+            'error' => false
+        ]);
     }
 
 }
