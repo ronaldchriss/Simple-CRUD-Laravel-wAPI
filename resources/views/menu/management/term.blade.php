@@ -8,20 +8,20 @@
             <div class="widget-content widget-content-area br-6">
                 <div class="test row">
                     <div class="col-lg-6 text-left">
-                        <h5><b> Data User </b></h5>
+                        <h5><b> Data Term Sign Language </b></h5>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#AddUser"
-                            data-whatever="@mdo">Add User</a>
+                            data-whatever="@mdo">Add Term</a>
                     </div>
                 </div>
                 <table id="zero-config" class="table dt-table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>No.</th>
+                            <th>Title</th>
+                            <th>Desc</th>
+                            <th>Video</th>
                             <th class="no-content">Actions</th>
                         </tr>
                     </thead>
@@ -30,7 +30,12 @@
                             <td>Tiger Nixon</td>
                             <td>System Architect</td>
                             <td>Edinburgh</td>
-                            <td><span class="badge badge-secondary"> Asesor </span></td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary mb-2" data-toggle="modal" data-target="#Edit"
+                                    data-whatever="@mdo">
+                                    Link
+                                </a>
+                            </td>
                             <td>
                                 <a class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#Edit"
                                     data-whatever="@mdo">
@@ -135,15 +140,6 @@
                 </table>
             </div>
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th class="no-content"></th>
-                </tr>
-            </tfoot>
             </table>
         </div>
     </div>
@@ -157,7 +153,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Tambah User</h5>
+                <h5 class="modal-title">Form Add Term</h5>
                 <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -171,27 +167,20 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group mb-4">
-                        <label for="inputState">Name User</label>
+                        <label for="inputState">No Term</label>
+                        <input type="number" class="form-control" id="name" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputState">Title Term</label>
                         <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="Role">Role User</label>
-                        <select id="Role" class="form-control selectpicker" name="roles" data-live-search="true"
-                            title="Choose Role User">
-                            <option value="admin">Admin</option>
-                            <option value="asesor">Asesor</option>
-                            <option value="manager">Manager</option>
-                        </select>
+                        <label for="inputState">Link Video</label>
+                        <input type="number" class="form-control" id="name" placeholder="Name" name="name" required>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email@email.com" name="email"
-                            required>
-                    </div>
-                    <div id="password-field" class="form-group mb-4">
-                        <label for="password">Password</label>
-                        <input id="password" name="password" type="password" class="form-control"
-                            placeholder="Password">
+                        <textarea class="form-control" name="wysiwyg-editor" id="konten"></textarea>
                     </div>
             </div>
             <div class="modal-footer md-button">
@@ -204,3 +193,10 @@
 </div>
 
 @endsection
+
+@section('script')
+
+
+    
+@endsection
+

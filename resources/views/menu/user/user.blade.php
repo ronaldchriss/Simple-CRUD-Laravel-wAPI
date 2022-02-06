@@ -135,15 +135,7 @@
                 </table>
             </div>
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th class="no-content"></th>
-                </tr>
-            </tfoot>
+            
             </table>
         </div>
     </div>
@@ -157,7 +149,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Tambah User</h5>
+                <h5 class="modal-title">Form Add  User</h5>
                 <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

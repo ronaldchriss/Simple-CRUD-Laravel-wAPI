@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,13 +23,15 @@ Route::get('/user', function () {
 })->name('user');
 
 Route::get('/management/term', function () {
-    return view('menu.dashboard');
+    return view('menu.management.term');
 })->name('management.term');
 
 Route::get('/management/theme', function () {
-    return view('menu.dashboard');
+    return view('menu.management.term');
 })->name('management.theme');
 
 Route::get('/management/content', function () {
-    return view('menu.dashboard');
+    return view('menu.management.term');
 })->name('management.content');
+
+Route::post('upload/img',[CKEditorController::class, 'upload'])->name('ckeditor.upload');
