@@ -36,6 +36,7 @@
 
         <!--  BEGIN CONTENT AREA  -->
         <div id="content" class="main-content">
+            @include('sweetalert::alert')
             @yield('menu')
             
         </div>

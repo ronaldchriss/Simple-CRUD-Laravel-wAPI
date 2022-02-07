@@ -22,27 +22,42 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th class="no-content">Status</th>
                             <th class="no-content">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $no = 1
+                        @endphp
+                        @foreach ($user as $item)
+                        
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td><span class="badge badge-secondary"> Asesor </span></td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->phone}}</td>
+                            <td>{{$item->email}}</td>
+                            @if ($item->role == "admin")
+                                <td><span class="badge badge-primary"> Admin </span></td> 
+                            @else
+                                <td><span class="badge badge-secondary"> User </span></td> 
+                            @endif
+                            @if ($item->status == 1)
+                                <td><span class="badge badge-success"> On </span></td> 
+                            @else
+                                <td><span class="badge badge-danger"> Off </span></td> 
+                            @endif
                             <td>
-                                <a class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#Edit"
+                                <a class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#Edit{{$item->id}}"
                                     data-whatever="@mdo">
                                     Edit
                                 </a>
-                                <a class="btn btn-sm btn-danger mb-2" data-toggle="modal" data-target="#Delete"
+                                <a class="btn btn-sm btn-danger mb-2" data-toggle="modal" data-target="#Delete{{$item->id}}"
                                     data-whatever="@mdo">
                                     Delete
                                 </a>
                             </td>
                         </tr>
-                        {{-- <div id="Delete{{$item->code_users}}" class="modal fade" role="dialog">
+                        <div id="Delete{{$item->id}}" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-dialog-centered">
                                 <!-- Modal content-->
                                 <div class="modal-content">
@@ -61,14 +76,14 @@
                                     <div class="modal-footer md-button">
                                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
                                             Tidak</button>
-                                        <a href="{{route('user-delete', $item->code_users)}}"
+                                        <a href="{{route('user.delete', $item->id)}}"
                                             class="btn btn-danger">Ya</a>
                                     </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div id="Edit{{$item->code_users}}" class="modal fade" role="dialog">
+                        <div id="Edit{{$item->id}}" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                 <!-- Modal content-->
                                 <div class="modal-content">
@@ -85,7 +100,7 @@
                                         </a>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{route('user-update', $item->code_users)}}" method="POST"
+                                        <form action="{{route('user.update', $item->id)}}" method="POST"
                                             enctype="multipart/form-data">
                                             {{csrf_field()}}
                                             <div class="form-group mb-4">
@@ -94,22 +109,9 @@
                                                     value="{{$item->name}}" name="name" required>
                                             </div>
                                             <div class="form-group mb-4">
-                                                <label for="RoleUser">Role User</label>
-                                                <select id="RoleUser" class="form-control" name="roles">
-                                                    @if ($item->roles == "admin")
-                                                    <option value="admin" selected>Admin</option>
-                                                    <option value="manager">Manager</option>
-                                                    <option value="asesor">Asesor</option>
-                                                    @elseif ($item->roles == "manager")
-                                                    <option value="manager" selected>Manager</option>
-                                                    <option value="admin">Admin</option>
-                                                    <option value="asesor">Asesor</option>
-                                                    @else
-                                                    <option value="asesor" selected>Asesor</option>
-                                                    <option value="manager">Manager</option>
-                                                    <option value="admin">Admin</option>
-                                                    @endif
-                                                </select>
+                                                <label for="inputState">Phone User</label>
+                                                <input type="text" class="form-control" id="phone"
+                                                    value="{{$item->phone}}" name="phone" required>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="inputState">Email</label>
@@ -130,7 +132,11 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        @php
+                            $no++
+                        @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -160,20 +166,15 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('user.make')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group mb-4">
                         <label for="inputState">Name User</label>
                         <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="Role">Role User</label>
-                        <select id="Role" class="form-control selectpicker" name="roles" data-live-search="true"
-                            title="Choose Role User">
-                            <option value="admin">Admin</option>
-                            <option value="asesor">Asesor</option>
-                            <option value="manager">Manager</option>
-                        </select>
+                        <label for="inputState">Phone User</label>
+                        <input type="text" class="form-control" id="phone" placeholder="0813xxxxx" name="phone" required>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Email</label>

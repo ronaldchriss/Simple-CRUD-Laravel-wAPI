@@ -26,6 +26,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $no = 1
+                        @endphp
+                        @foreach ($term as $item)
                         <tr>
                             <td>Tiger Nixon</td>
                             <td>System Architect</td>
@@ -136,6 +140,9 @@
                                 </div>
                             </div>
                         </div> --}}
+                        @endforeach
+                        
+                        
                     </tbody>
                 </table>
             </div>
@@ -179,7 +186,7 @@
                         <input type="number" class="form-control" id="name" placeholder="Name" name="name" required>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="inputState">Email</label>
+                        <label for="inputState">Description Term</label>
                         <textarea class="form-control" name="wysiwyg-editor" id="konten"></textarea>
                     </div>
             </div>
