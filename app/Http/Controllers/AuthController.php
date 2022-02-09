@@ -122,6 +122,7 @@ class AuthController extends Controller
 
     public function exit()
     {
+        User::where('id', Auth::user()->id)->update(['status' => 0]);
         Auth::logout();
         return redirect()->route('login');
     }
