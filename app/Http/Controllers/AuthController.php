@@ -110,7 +110,7 @@ class AuthController extends Controller
         if (Auth::attempt($login)) {
             if (Auth::user()->role ==  "admin") {
                 User::where('email', $req->email)->update(['status' => 1]);
-                return redirect('/dashboard');
+                return redirect()->route('dash');
             }
             Alert::error('Sorry You Cant Access This Site');
             return back();
@@ -123,7 +123,7 @@ class AuthController extends Controller
     public function exit()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect()->route('login');
     }
 
     protected function validator($req){

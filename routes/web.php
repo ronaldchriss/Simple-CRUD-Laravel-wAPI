@@ -3,8 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\TermController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Lcobucci\JWT\Signer\Ecdsa\Sha256;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,23 +43,32 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/exit', 'exit')->name('exit');
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('term', TermController::class, [
-        'names' => [
-            'index' => 'management.term',
-            'store' => 'term.make',
-            'update' => 'term.update',
-            'edit' => 'term.edit',
-            'show' => 'term.destroy'
-        ]
-    ])->parameters([
-        'term' => 'code'
-    ]);
-    Route::controller(UserController::class)->prefix('user')->group(function(){
-        Route::get('/', 'user')->name('user');
-        Route::post('/make','create')->name('user.make');
-        Route::post('/update/{code}','update')->name('user.update');
-        Route::get('/delete/{code}','delete')->name('user.delete');
+Route::group(['middleware' => ['auth'],], function () {
+    Route::prefix(hash('sha256','signalog').'-signalog')->group(function(){
+        Route::resource('term', TermController::class, [
+            'names' => [
+                'index' => 'management.term',
+                'store' => 'term.make',
+                'update' => 'term.update',
+                'edit' => 'term.edit',
+                'show' => 'term.destroy'
+            ]
+        ])->parameters(['term' => 'code']);
+        Route::resource('theme', ThemeController::class, [
+            'names' => [
+                'index' => 'management.thm',
+                'store' => 'thm.make',
+                'update' => 'thm.update',
+                'edit' => 'thm.edit',
+                'show' => 'thm.destroy'
+            ]
+        ])->parameters(['theme' => 'code']);
+        Route::controller(UserController::class)->prefix('user')->group(function(){
+            Route::get('/', 'user')->name('user');
+            Route::post('/make','create')->name('user.make');
+            Route::post('/update/{code}','update')->name('user.update');
+            Route::get('/delete/{code}','delete')->name('user.delete');
+        });
     });
 });
 

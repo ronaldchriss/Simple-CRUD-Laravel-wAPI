@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Link Video</label>
-                        <input type="text" class="form-control" id="video_trm" placeholder="Name" name="video_trm" required>
+                        <input type="text" class="form-control" id="video_trm" placeholder="Link Video Term" name="video_trm" required>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Description Term</label>
