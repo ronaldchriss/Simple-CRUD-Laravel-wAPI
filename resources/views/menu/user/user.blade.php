@@ -62,7 +62,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Apakah User {{$item->name}} Mau Dihapus ?</h5>
+                                        <h5 class="modal-title">Are you sure want delete user {{$item->name}} ?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -75,9 +75,9 @@
                                     </div>
                                     <div class="modal-footer md-button">
                                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                                            Tidak</button>
+                                            Cancel</button>
                                         <a href="{{route('user.delete', $item->id)}}"
-                                            class="btn btn-danger">Ya</a>
+                                            class="btn btn-danger">Delete</a>
                                     </div>
                                     </form>
                                 </div>

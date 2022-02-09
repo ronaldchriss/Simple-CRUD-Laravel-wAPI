@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Term;
 use Illuminate\Http\Request;
+use Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TermController extends Controller
 {
@@ -24,7 +26,7 @@ class TermController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -33,9 +35,17 @@ class TermController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $term = "";
+        $status = "create";
+        $term = $this->make($req, $status, $term);
+        if ($term == 'error') {
+            toast('Error', 'error', 'bottom-right');
+            return back();
+        }
+        toast('Successfull Add Term', 'success', 'bottom-right');
+        return back();
     }
 
     /**
@@ -44,9 +54,11 @@ class TermController extends Controller
      * @param  \App\Models\Term  $term
      * @return \Illuminate\Http\Response
      */
-    public function show(Term $term)
+    public function show(Term $term, $code)
     {
-        //
+        $term::where('id', $code)->delete();
+        toast('Term already delete', 'success');
+        return back();
     }
 
     /**
@@ -55,9 +67,9 @@ class TermController extends Controller
      * @param  \App\Models\Term  $term
      * @return \Illuminate\Http\Response
      */
-    public function edit(Term $term)
+    public function edit(Term $term, $code)
     {
-        //
+        return view('menu.management.term-edit', ['term' => $term->where('id', $code)->first()]);
     }
 
     /**
@@ -67,9 +79,16 @@ class TermController extends Controller
      * @param  \App\Models\Term  $term
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Term $term)
+    public function update(Request $req, $code)
     {
-        //
+        $status = "update";
+        $term = $this->make($req, $status, $code);
+        if ($term == 'error') {
+            toast('Error', 'error', 'bottom-right');
+            return back();
+        }
+        toast('Successfull Update Term', 'success', 'bottom-right');
+        return redirect()->route('management.term');
     }
 
     /**
@@ -78,8 +97,33 @@ class TermController extends Controller
      * @param  \App\Models\Term  $term
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Term $term)
+    public function destroy(Term $term, $code)
     {
-        //
+    }
+
+    protected function make($req, $status, $code){
+        if (!$code) {
+            $term = Term::$status([
+                'title_trm' => $req->title_trm,
+                'video_trm' => $req->video_trm,
+                'desc_trm' => $req->desc_trm,
+                'priority' => $req->priority
+            ]);
+        }else{
+            $term  = Term::where('id',$code)->$status([
+                'title_trm' => $req->title_trm,
+                'video_trm' => $req->video_trm,
+                'desc_trm' => $req->desc_trm,
+                'priority' => $req->priority
+            ]);
+        }
+        if (!$term ) {
+            return response()->json([
+                'error' => true
+            ]);
+        }
+        return response()->json([
+            'error' => false
+        ]);
     }
 }

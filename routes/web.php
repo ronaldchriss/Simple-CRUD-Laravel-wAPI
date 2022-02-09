@@ -46,8 +46,12 @@ Route::group(['middleware' => ['auth']], function () {
         'names' => [
             'index' => 'management.term',
             'store' => 'term.make',
-            // etc...
+            'update' => 'term.update',
+            'edit' => 'term.edit',
+            'show' => 'term.destroy'
         ]
+    ])->parameters([
+        'term' => 'code'
     ]);
     Route::controller(UserController::class)->prefix('user')->group(function(){
         Route::get('/', 'user')->name('user');

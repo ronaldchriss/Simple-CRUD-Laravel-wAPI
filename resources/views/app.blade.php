@@ -90,7 +90,16 @@
             filebrowserUploadMethod: 'form'
         });
         CKEDITOR.config.allowedContent = true;
-     </script>
+    </script>
+    <script>
+        var konten = document.getElementsByClassName("kontenEdit");
+          CKEDITOR.replace(konten,{
+            language:'en-gb',
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.config.allowedContent = true;
+    </script>
 
     @yield('script')
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

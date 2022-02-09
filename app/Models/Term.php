@@ -11,6 +11,7 @@ class Term extends Model
     protected $fillable = [
         'title_trm',
         'video_trm',
-        'desc_trm'
+        'desc_trm',
+        'priority'
     ];
 }
