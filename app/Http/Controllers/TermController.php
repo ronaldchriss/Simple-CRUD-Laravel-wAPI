@@ -105,14 +105,14 @@ class TermController extends Controller
         if (!$code) {
             $term = Term::$status([
                 'title_trm' => $req->title_trm,
-                'video_trm' => $req->video_trm,
+                'video_trm' => str_replace('watch?v=', 'embed/', $req->video_trm),
                 'desc_trm' => $req->desc_trm,
                 'priority' => $req->priority
             ]);
         }else{
             $term  = Term::where('id',$code)->$status([
                 'title_trm' => $req->title_trm,
-                'video_trm' => $req->video_trm,
+                'video_trm' => str_replace('watch?v=', 'embed/', $req->video_trm),
                 'desc_trm' => $req->desc_trm,
                 'priority' => $req->priority
             ]);

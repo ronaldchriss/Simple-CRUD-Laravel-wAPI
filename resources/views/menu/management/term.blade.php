@@ -31,12 +31,11 @@
                         @endphp
                         @foreach ($term as $item)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
+                            <td>{{$item->priority}}</td>
+                            <td>{{$item->title_trm}}</td>
+                            <td>{!! Str::limit($item->desc_trm, 10)!!}</td>
                             <td>
-                                <a class="btn btn-sm btn-secondary mb-2" data-toggle="modal" data-target="#Edit"
-                                    data-whatever="@mdo">
+                                <a class="btn btn-sm btn-secondary mb-2" href="{{$item->video_trm}}" target="_blank">
                                     Link
                                 </a>
                             </td>
@@ -119,7 +118,11 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Link Video</label>
-                        <input type="text" class="form-control" id="video_trm" placeholder="Link Video Term" name="video_trm" required>
+                        <input type="text" class="form-control" id="video_trm" placeholder="Link Video Term" name="video_trm" required onchange="readURL(this);">
+                        <br>
+                        <center>
+                            <iframe style="display: none" width="420" height="315" src="//www.youtube.com/embed/BstTBw6BLrE" frameborder="0" allowfullscreen id="video_preview"></iframe>
+                        </center>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Description Term</label>
@@ -139,7 +142,18 @@
 
 @section('script')
 
-
+<script type="text/javascript">
+    function readURL(input) {
+        document.getElementById("video_preview").style.display="block";
+        if(input.value == null || input.value == ''){
+            document.getElementById("video_preview").style.display="none";
+        }
+        var video_url_params = input.value;
+        var url = video_url_params.replace("watch?v=", "embed/");
+        $('#video_preview').attr('src', url);
+        return false;
+    }
+</script>
     
 @endsection
 

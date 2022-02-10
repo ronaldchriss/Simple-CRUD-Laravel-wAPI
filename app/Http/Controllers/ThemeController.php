@@ -67,7 +67,7 @@ class ThemeController extends Controller
      */
     public function edit(Theme $theme, $code)
     {
-        return view('menu.management.term-edit', ['term' => $theme->where('id', $code)->first()]);
+        return view('menu.management.theme-edit', ['theme' => $theme->where('id', $code)->first()]);
     }
 
     /**
@@ -101,16 +101,20 @@ class ThemeController extends Controller
     }
 
     protected function make($req, $status, $code){
+        if ($req->hasFile('img_thm')) {
+            $name = rand().'.png';
+            $req->file('img_thm')->move(public_path('images'), $name);
+        }
         if (!$code) {
             $term = Theme::$status([
                 'title_thm' => $req->title_thm,
-                'video_thm' => $req->video_thm,
+                'img_thm' => $name,
                 'desc_thm' => $req->desc_thm,
             ]);
         }else{
             $term  = Theme::where('id',$code)->$status([
                 'title_thm' => $req->title_thm,
-                'video_thm' => $req->video_thm,
+                'img_thm' => $name,
                 'desc_thm' => $req->desc_thm,
             ]);
         }

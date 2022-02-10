@@ -92,11 +92,16 @@
         CKEDITOR.config.allowedContent = true;
     </script>
     <script>
-        var konten = document.getElementsByClassName("kontenEdit");
-          CKEDITOR.replace(konten,{
+        var konten = document.getElementById("theme");
+        CKEDITOR.replace(konten,{
             language:'en-gb',
-            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
-            filebrowserUploadMethod: 'form'
+            toolbar :
+            [
+                { name: 'basicstyles', items : [ 'Bold','Italic' ] },
+                { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+                { name: 'tools', items : [ 'Maximize' ] }
+            ]
+            
         });
         CKEDITOR.config.allowedContent = true;
     </script>

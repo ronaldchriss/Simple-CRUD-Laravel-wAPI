@@ -18,16 +18,20 @@
                         
                         <div class="form-group mb-4">
                             <label for="inputState">No Term</label>
-                            <input type="number" class="form-control" id="priority" placeholder="No" name="priority" required>
+                            <input type="number" class="form-control" id="priority" placeholder="No" name="priority" value="{{$term->priority}}" required>
                         </div>
                         <div class="form-group mb-4">
                             <label for="inputState">Title Term</label>
-                            <input type="text" class="form-control" id="title_trm" placeholder="Title Term" name="title_trm" required>
+                            <input type="text" class="form-control" id="title_trm" placeholder="Title Term" name="title_trm" value="{{$term->title_trm}}" required>
                         </div>
                         <div class="form-group mb-4">
                             <label for="inputState">Link Video</label>
-                            <input type="text" class="form-control" id="video_trm" placeholder="Name" name="video_trm" required>
+                            <input type="text" class="form-control" id="video_trm" placeholder="Name" value="{{$term->video_trm}}" name="video_trm" onchange="readURL(this);" required>
                         </div>
+                        <br>
+                        <center>
+                            <iframe style="display: block" width="420" height="315" src="{{$term->video_trm}}" frameborder="0" allowfullscreen id="video_preview"></iframe>
+                        </center>
                         <div class="form-group mb-4">
                             <label for="inputState">Description Term</label>
                             <textarea class="form-control" name="desc_trm" id="konten">{{$term->desc_trm}}</textarea>
@@ -51,7 +55,15 @@
 
 @section('script')
 
-
+<script type="text/javascript">
+    function readURL(input) {
+        console.log(input.value);
+        var video_url_params = input.value;
+        var url = video_url_params.replace("watch?v=", "embed/");
+        $('#video_preview').attr('src', url);
+        return false;
+    }
+</script>
     
 @endsection
 

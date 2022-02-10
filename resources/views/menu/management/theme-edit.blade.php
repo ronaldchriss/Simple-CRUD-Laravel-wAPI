@@ -11,16 +11,21 @@
                         <h5><b> Edit Theme</b></h5>
                     </div>
                 </div>
-                <form action="{{route('theme.update', $theme->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('thm.update', $theme->id)}}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         {{csrf_field()}}
                         <div class="form-group mb-4">
                             <label for="inputState">Title Theme</label>
-                            <input type="text" class="form-control" id="title_thm" placeholder="Title theme" name="title_thm" required>
+                            <input type="text" class="form-control" id="title_thm" value="{{$theme->title_thm}}" name="title_thm" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="inputState">Link Video</label>
-                            <input type="text" class="form-control" id="video_thm" placeholder="Link Video" name="video_thm" required>
+                            <label for="inputState">Image Theme</label>
+                            <input type="file" class="form-control" id="img_thm" placeholder="Image Theme" name="img_thm" required onchange="readURL(this);">
+                            <br>
+                            <center>
+                                <img src="{{asset('images/'.$theme->img_thm)}}" id="img_preview" width="200px" height="200px" />
+                            </center>
+                            
                         </div>
                         <div class="form-group mb-4">
                             <label for="inputState">Description Theme</label>
@@ -45,7 +50,19 @@
 
 @section('script')
 
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#img_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
     
 @endsection
 

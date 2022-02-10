@@ -27,10 +27,6 @@ Route::get('/dashboard', function () {
     return view('menu.dashboard');
 })->name('dash');
 
-Route::get('/management/theme', function () {
-    return view('menu.management.theme');
-})->name('management.theme');
-
 Route::get('/management/content', function () {
     return view('menu.management.term');
 })->name('management.content');
@@ -56,7 +52,7 @@ Route::group(['middleware' => ['auth'],], function () {
         ])->parameters(['term' => 'code']);
         Route::resource('theme', ThemeController::class, [
             'names' => [
-                'index' => 'management.thm',
+                'index' => 'management.theme',
                 'store' => 'thm.make',
                 'update' => 'thm.update',
                 'edit' => 'thm.edit',
