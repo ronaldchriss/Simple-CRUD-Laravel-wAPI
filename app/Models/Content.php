@@ -27,4 +27,9 @@ class Content extends Model
     {
         return $this->hasMany('App\Models\React', 'content','id');
     }
+    
+    public function status()
+    {
+        return $this->hasMany('App\Models\Status', 'relation','id');
+    }
 }

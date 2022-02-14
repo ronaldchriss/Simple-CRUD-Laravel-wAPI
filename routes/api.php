@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('auth', [AuthController::class, 'authenticate'])->name('authenticate');
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::controller(APIController::class)->group(function(){
