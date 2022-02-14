@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\ContController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
@@ -59,6 +61,15 @@ Route::group(['middleware' => ['auth'],], function () {
                 'show' => 'thm.destroy'
             ]
         ])->parameters(['theme' => 'code']);
+        Route::resource('content', ContentController::class, [
+            'names' => [
+                'index' => 'management.content',
+                'store' => 'content.make',
+                'update' => 'content.update',
+                'edit' => 'content.edit',
+                'show' => 'content.destroy'
+            ]
+        ])->parameters(['content' => 'code']);
         Route::controller(UserController::class)->prefix('user')->group(function(){
             Route::get('/', 'user')->name('user');
             Route::post('/make','create')->name('user.make');

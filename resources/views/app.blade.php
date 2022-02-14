@@ -18,6 +18,10 @@
     <link href="{{asset('assets/css/dashboard/dash_1.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/dt-global_style.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/font-icons/fontawesome/css/regular.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/font-icons/fontawesome/css/fontawesome.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-select/bootstrap-select.min.css')}}">
+    <link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -64,6 +68,10 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="{{asset('assets/js/dashboard/dash_1.js')}}"></script>
     <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
+    <script src="{{asset('plugins/font-icons/feather/feather.min.js')}}"></script>
+    <script type="text/javascript">
+        feather.replace();
+    </script>
     <script>
         $('#zero-config').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
@@ -105,6 +113,8 @@
         });
         CKEDITOR.config.allowedContent = true;
     </script>
+    <script src="{{asset('plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 
     @yield('script')
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

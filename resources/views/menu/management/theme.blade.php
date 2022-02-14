@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $item->title_thm }}</td>
                                 <td>
-                                    {!! $item->desc_thm !!}
+                                    {!! Str::limit($item->desc_thm, 10)!!}
                                 </td>
                                 <td>
                                     <img src="{{asset('images/'.$item->img_thm)}}" id="img_preview" width="70px" height="70px" />
