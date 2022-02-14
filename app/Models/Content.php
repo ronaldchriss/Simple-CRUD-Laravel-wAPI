@@ -22,4 +22,9 @@ class Content extends Model
     {
         return $this->belongsTo('App\Models\Theme', 'theme', 'id');
     }
+
+    public function reply()
+    {
+        return $this->hasMany('App\Models\React', 'content','id');
+    }
 }

@@ -12,4 +12,9 @@ class React extends Model
         'content',
         'review'
     ];
+
+    public function reply()
+    {
+        return $this->belongsTo(Content::class, 'id', 'content');
+    }
 }
