@@ -44,7 +44,8 @@ class APIController extends Controller
     protected function reply(Request $req, $id){
         $test = React::create([
             'content' => $id,
-            'review' => $req->review
+            'review' => $req->review,
+            'created_by' => auth()->user()->name
         ]);
         $data = Content::where('id', $id)->with('reply')->get();
         return response()->json($data);

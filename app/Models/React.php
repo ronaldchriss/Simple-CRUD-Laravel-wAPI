@@ -10,7 +10,8 @@ class React extends Model
     use HasFactory;
     protected $fillable = [
         'content',
-        'review'
+        'review',
+        'created_by'
     ];
 
     public function reply()
