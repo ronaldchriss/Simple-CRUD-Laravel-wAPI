@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\React;
+use App\Models\Term;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
@@ -11,6 +13,16 @@ class APIController extends Controller
     protected function home()
     {
         # code...
+    }
+
+    protected function list_term(){
+        $data = Term::get();
+        return response()->json($data);
+    }
+
+    protected function list_theme(){
+        $data = Theme::get();
+        return response()->json($data);
     }
 
     protected function list_content($theme){

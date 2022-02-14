@@ -30,5 +30,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
             Route::get('/{id}/{status}', 'status')->name('status');
             Route::post('/reply/{id}', 'reply')->name('reply');
         });
+        Route::get('theme', [APIController::class, 'list_theme'])->name('theme');
+        Route::get('term', [APIController::class, 'list_term'])->name('term');
     });
 });
