@@ -38,9 +38,9 @@
                                 <td>{!! Str::limit($item->desc, 100) !!}</td>
                                 <td>
                                     <span>
-                                         <i data-feather="eye"></i> {{$item->view}} &nbsp;&nbsp;
-                                         <i data-feather="thumbs-up"></i> {{$item->view}} &nbsp;&nbsp;
-                                         <i data-feather="thumbs-down"></i> {{$item->view}}
+                                         <i data-feather="eye"></i> &nbsp; <b>{{$item->view}}</b> &nbsp;&nbsp;
+                                         <i data-feather="thumbs-up"></i> &nbsp; <b>{{$item->like}}</b>  &nbsp;&nbsp;
+                                         <i data-feather="thumbs-down"></i> &nbsp; <b>{{$item->dislike}}</b> 
                                     </span>
                                 </td>
                                 <td>

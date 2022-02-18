@@ -12,23 +12,67 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table rdk_easy_indo.contents
+CREATE TABLE IF NOT EXISTS `contents` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `theme` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `view` bigint DEFAULT '0',
+  `like` bigint DEFAULT '0',
+  `dislike` bigint DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.contents: ~0 rows (approximately)
-DELETE FROM `contents`;
 /*!40000 ALTER TABLE `contents` DISABLE KEYS */;
+INSERT INTO `contents` (`id`, `theme`, `title`, `video`, `desc`, `view`, `like`, `dislike`, `created_at`, `updated_at`) VALUES
+	(2, '1', 'test', 'https://www.youtube.com/embed/a1YCn6T7c8U', '<p><em><strong>test</strong></em></p>', 13, 1, 0, '2022-02-14 02:49:20', '2022-02-14 04:08:17');
 /*!40000 ALTER TABLE `contents` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.districts
+CREATE TABLE IF NOT EXISTS `districts` (
+  `id` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `regency_id` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `districts_regency_id_foreign` (`regency_id`),
+  KEY `districts_id_index` (`id`),
+  CONSTRAINT `districts_regency_id_foreign` FOREIGN KEY (`regency_id`) REFERENCES `regencies` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.districts: ~0 rows (approximately)
-DELETE FROM `districts`;
 /*!40000 ALTER TABLE `districts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `districts` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.failed_jobs
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.failed_jobs: ~0 rows (approximately)
-DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.migrations
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.migrations: ~11 rows (approximately)
-DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -45,18 +89,46 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(12, '2017_05_02_143454_create_villages_tables', 3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.password_resets
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.password_resets: ~0 rows (approximately)
-DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.personal_access_tokens
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.personal_access_tokens: ~0 rows (approximately)
-DELETE FROM `personal_access_tokens`;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.provinces
+CREATE TABLE IF NOT EXISTS `provinces` (
+  `id` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `provinces_id_index` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.provinces: ~34 rows (approximately)
-DELETE FROM `provinces`;
 /*!40000 ALTER TABLE `provinces` DISABLE KEYS */;
 INSERT INTO `provinces` (`id`, `name`) VALUES
 	('11', 'ACEH'),
@@ -95,13 +167,37 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 	('94', 'PAPUA');
 /*!40000 ALTER TABLE `provinces` ENABLE KEYS */;
 
--- Dumping data for table rdk_easy_indo.reacts: ~0 rows (approximately)
-DELETE FROM `reacts`;
+-- Dumping structure for table rdk_easy_indo.reacts
+CREATE TABLE IF NOT EXISTS `reacts` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `content` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `review` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table rdk_easy_indo.reacts: ~3 rows (approximately)
 /*!40000 ALTER TABLE `reacts` DISABLE KEYS */;
+INSERT INTO `reacts` (`id`, `content`, `review`, `created_by`, `created_at`, `updated_at`) VALUES
+	(1, '2', 'test', NULL, NULL, NULL),
+	(2, '2', 'test2', NULL, '2022-02-14 03:16:15', '2022-02-14 03:16:15'),
+	(3, '2', 'test5', NULL, '2022-02-14 03:16:44', '2022-02-14 03:16:44'),
+	(4, '2', 'test5', 'rama', '2022-02-14 03:32:52', '2022-02-14 03:32:52');
 /*!40000 ALTER TABLE `reacts` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.regencies
+CREATE TABLE IF NOT EXISTS `regencies` (
+  `id` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_id` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `regencies_province_id_foreign` (`province_id`),
+  KEY `regencies_id_index` (`id`),
+  CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.regencies: ~514 rows (approximately)
-DELETE FROM `regencies`;
 /*!40000 ALTER TABLE `regencies` DISABLE KEYS */;
 INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 	('1101', '11', 'KABUPATEN SIMEULUE'),
@@ -620,31 +716,97 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 	('9471', '94', 'KOTA JAYAPURA');
 /*!40000 ALTER TABLE `regencies` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.status
+CREATE TABLE IF NOT EXISTS `status` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `relation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table rdk_easy_indo.status: ~0 rows (approximately)
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` (`id`, `status`, `relation`, `created_by`, `created_at`, `updated_at`) VALUES
+	(1, 'like', '2', 'rama', '2022-02-14 03:54:37', '2022-02-14 04:08:17');
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
+
+-- Dumping structure for table rdk_easy_indo.terms
+CREATE TABLE IF NOT EXISTS `terms` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `priority` int unsigned DEFAULT NULL,
+  `title_trm` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video_trm` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc_trm` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.terms: ~0 rows (approximately)
-DELETE FROM `terms`;
 /*!40000 ALTER TABLE `terms` DISABLE KEYS */;
+INSERT INTO `terms` (`id`, `priority`, `title_trm`, `video_trm`, `desc_trm`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'test', 'https://www.youtube.com/embed/Be9qITE-mkc', '<p>test</p>', '2022-02-10 03:17:32', '2022-02-10 03:17:32');
 /*!40000 ALTER TABLE `terms` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.themes
+CREATE TABLE IF NOT EXISTS `themes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title_thm` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img_thm` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc_thm` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table rdk_easy_indo.themes: ~0 rows (approximately)
-DELETE FROM `themes`;
 /*!40000 ALTER TABLE `themes` DISABLE KEYS */;
+INSERT INTO `themes` (`id`, `title_thm`, `img_thm`, `desc_thm`, `created_at`, `updated_at`) VALUES
+	(1, 'test', '398185099.png', '<p><em><strong>test</strong></em></p>', '2022-02-09 11:34:20', '2022-02-09 11:34:20');
 /*!40000 ALTER TABLE `themes` ENABLE KEYS */;
 
+-- Dumping structure for table rdk_easy_indo.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` varchar(100) NOT NULL DEFAULT (uuid()),
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `old` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `users_email_unique` (`email`) USING BTREE,
+  UNIQUE KEY `users_phone_unique` (`phone`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Dumping data for table rdk_easy_indo.users: ~0 rows (approximately)
-DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `gender`, `old`, `province`, `city`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-	('2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 'rama', 'rama@gmail.com', '081xxxxx', NULL, NULL, NULL, NULL, '$2y$10$RMR0VsmJ/AGfbvNoR34vcuoLw7YGYvFRYtPLOBO93hvG8ao/SPNry', 'admin', '1', NULL, '2022-02-07 15:54:56', '2022-02-09 08:14:56'),
+	('2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 'rama', 'rama@gmail.com', '081xxxxx', NULL, NULL, NULL, NULL, '$2y$10$RMR0VsmJ/AGfbvNoR34vcuoLw7YGYvFRYtPLOBO93hvG8ao/SPNry', 'admin', '1', NULL, '2022-02-07 15:54:56', '2022-02-14 01:38:39'),
 	('48597456-8997-11ec-9919-1831bf85a260', 'test', 'admin@gmail.com', '081330335998', NULL, NULL, NULL, NULL, '$2y$10$OjGsPd5dnu39WsxuFFHK8uAJCdhEj/phb4riAb.mxJVcY8gNwtZb6', 'admin', NULL, NULL, '2022-02-09 10:58:58', '2022-02-09 10:58:58');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Dumping data for table rdk_easy_indo.users3: ~1 rows (approximately)
-DELETE FROM `users3`;
-/*!40000 ALTER TABLE `users3` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users3` ENABLE KEYS */;
+-- Dumping structure for table rdk_easy_indo.villages
+CREATE TABLE IF NOT EXISTS `villages` (
+  `id` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district_id` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `villages_district_id_foreign` (`district_id`),
+  KEY `villages_id_index` (`id`),
+  CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table rdk_easy_indo.villages: ~0 rows (approximately)
-DELETE FROM `villages`;
 /*!40000 ALTER TABLE `villages` DISABLE KEYS */;
 /*!40000 ALTER TABLE `villages` ENABLE KEYS */;
 
