@@ -7,32 +7,13 @@ use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $req, $flag)
     {
-        return view('menu.management.theme',['theme'=>Theme::get()]);
+        $req->session()->put('flag', $flag);
+        $theme = Theme::where('flag', $flag)->get();
+        return view('menu.management.theme', compact('theme'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $req)
     {
         $term = "";
@@ -45,13 +26,7 @@ class ThemeController extends Controller
         toast('Successfull Add Theme', 'success', 'bottom-right');
         return back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Theme $theme,$code)
     {
         $theme::where('id', $code)->delete();
@@ -59,24 +34,13 @@ class ThemeController extends Controller
         return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Theme $theme, $code)
     {
         return view('menu.management.theme-edit', ['theme' => $theme->where('id', $code)->first()]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $req, Theme $theme, $code)
     {
         $status = "update";
@@ -89,16 +53,6 @@ class ThemeController extends Controller
         return redirect()->route('management.theme');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Theme  $theme
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Theme $theme)
-    {
-        //
-    }
 
     protected function make($req, $status, $code){
         if ($req->hasFile('img_thm')) {
@@ -110,6 +64,7 @@ class ThemeController extends Controller
                 'title_thm' => $req->title_thm,
                 'img_thm' => $name,
                 'desc_thm' => $req->desc_thm,
+                'flag' => $req->session()->get('flag')
             ]);
         }else{
             $term  = Theme::where('id',$code)->$status([

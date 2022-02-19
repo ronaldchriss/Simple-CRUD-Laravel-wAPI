@@ -64,11 +64,11 @@
                     <li class="{{ (Request::route()->getName() == 'management.term') ? 'active' : ''}}">
                         <a href="{{route('management.term')}}"> Term  </a>
                     </li>
-                    <li class="{{ (Request::route()->getName() == 'management.theme') ? 'active' : ''}}">
-                        <a href="{{route('management.theme')}}"> Theme </a>
+                    <li class="{{ request()->routeIs('management.theme') && Session::get('flag') == 'dialog' ? 'active' : ''}}">
+                        <a href="{{route('management.theme', 'dialog')}}"> Content Dialog </a>
                     </li>
-                    <li class="{{ (Request::route()->getName() == 'management.content') ? 'active' : ''}}">
-                        <a href="{{route('management.content')}}"> Content </a>
+                    <li class="{{ request()->routeIs('management.theme') && Session::get('flag') == 'kamus' ? 'active' : ''}}">
+                        <a href="{{route('management.theme', 'kamus')}}"> Content Kamus </a>
                     </li>
                 </ul>
             </li>

@@ -11,6 +11,7 @@
                         <h5><b> Data Content </b></h5>
                     </div>
                     <div class="col-lg-6 text-right">
+                        <a class="btn btn-outline-danger" href="{{ url()->previous() }}">Back</a>
                         <a class="btn btn-outline-primary" data-toggle="modal" data-target="#AddUser"
                             data-whatever="@mdo">Add Content</a>
                     </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\ContController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\TermController;
+use App\Http\Controllers\ThemController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -52,24 +53,20 @@ Route::group(['middleware' => ['auth'],], function () {
                 'show' => 'term.destroy'
             ]
         ])->parameters(['term' => 'code']);
-        Route::resource('theme', ThemeController::class, [
-            'names' => [
-                'index' => 'management.theme',
-                'store' => 'thm.make',
-                'update' => 'thm.update',
-                'edit' => 'thm.edit',
-                'show' => 'thm.destroy'
-            ]
-        ])->parameters(['theme' => 'code']);
-        Route::resource('content', ContentController::class, [
-            'names' => [
-                'index' => 'management.content',
-                'store' => 'content.make',
-                'update' => 'content.update',
-                'edit' => 'content.edit',
-                'show' => 'content.destroy'
-            ]
-        ])->parameters(['content' => 'code']);
+        Route::controller(ThemeController::class)->prefix('theme')->group(function(){
+            Route::get('/{flag}', 'index')->name('management.theme');
+            Route::post('/make','store')->name('thm.make');
+            Route::get('/edit/{code}','edit')->name('thm.edit');
+            Route::post('/update/{code}','update')->name('thm.update');
+            Route::get('/delete/{code}','show')->name('thm.destroy');
+        });
+        Route::controller(ContentController::class)->prefix('content')->group(function(){
+            Route::get('/{code}', 'index')->name('management.content');
+            Route::post('/make','store')->name('content.make');
+            Route::get('/edit/{code}','edit')->name('content.edit');
+            Route::post('/update/{code}','update')->name('content.update');
+            Route::get('/delete/{code}','show')->name('content.destroy');
+        });
         Route::controller(UserController::class)->prefix('user')->group(function(){
             Route::get('/', 'user')->name('user');
             Route::post('/make','create')->name('user.make');

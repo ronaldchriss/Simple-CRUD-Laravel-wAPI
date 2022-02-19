@@ -13,9 +13,9 @@ class ContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($code)
     {
-        $content = Content::with('themes')->get();
+        $content = Content::with('themes')->where('theme', $code)->get();
         $theme = Theme::get();
         return view('menu.management.content', compact('content', 'theme'));
     }

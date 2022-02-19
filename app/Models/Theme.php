@@ -11,7 +11,8 @@ class Theme extends Model
     protected $fillable = [
         'title_thm',
         'img_thm',
-        'desc_thm'
+        'desc_thm',
+        'flag'
     ];
 
     public function contents()

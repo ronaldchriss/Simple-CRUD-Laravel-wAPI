@@ -8,7 +8,7 @@
             <div class="widget-content widget-content-area br-6">
                 <div class="test row">
                     <div class="col-lg-6 text-left">
-                        <h5><b> Data Theme </b></h5>
+                        <h5><b> Data Theme {{ucfirst(Session::get('flag'))}}</b></h5>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#AddUser"
@@ -32,12 +32,15 @@
                             <tr>
                                 <td>{{ $item->title_thm }}</td>
                                 <td>
-                                    {!! Str::limit($item->desc_thm, 10)!!}
+                                    {!! Str::limit($item->desc_thm, 100)!!}
                                 </td>
                                 <td>
                                     <img src="{{asset('images/'.$item->img_thm)}}" id="img_preview" width="70px" height="70px" />
                                 </td>
                                 <td>
+                                    <a class="btn btn-sm btn-secondary mb-2" href="{{route('management.content', $item->id)}}">
+                                        Content
+                                    </a>
                                     <a class="btn btn-sm btn-warning mb-2" href="{{route('thm.edit', $item->id)}}">
                                         Edit
                                     </a>
@@ -103,7 +106,7 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('thm.make')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group mb-4">
                         <label for="inputState">Title Theme</label>
