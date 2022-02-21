@@ -16,6 +16,7 @@ class React extends Model
 
     public function reply()
     {
-        return $this->belongsTo(Content::class, 'id', 'content');
+        return $this->belongsTo(Content::class, 'content', 'id');
     }
+
 }

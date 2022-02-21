@@ -45,6 +45,9 @@
                                     </span>
                                 </td>
                                 <td>
+                                    <a class="btn btn-sm btn-secondary mb-2" href="{{route('management.reply', $item->id)}}">
+                                        Reply
+                                    </a>
                                     <a class="btn btn-sm btn-warning mb-2" href="{{route('content.edit', $item->id)}}">
                                         Edit
                                     </a>

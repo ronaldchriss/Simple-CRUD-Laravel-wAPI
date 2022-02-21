@@ -8,6 +8,7 @@ use App\Http\Controllers\TermController;
 use App\Http\Controllers\ThemController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReplyCOntroller;
 use Illuminate\Support\Facades\Route;
 use Lcobucci\JWT\Signer\Ecdsa\Sha256;
 
@@ -72,6 +73,9 @@ Route::group(['middleware' => ['auth'],], function () {
             Route::post('/make','create')->name('user.make');
             Route::post('/update/{code}','update')->name('user.update');
             Route::get('/delete/{code}','delete')->name('user.delete');
+        });
+        Route::controller(ReplyCOntroller::class)->prefix('reply')->group(function(){
+            Route::get('/{code}', 'reply')->name('management.reply');
         });
     });
 });
