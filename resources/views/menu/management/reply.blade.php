@@ -29,7 +29,8 @@
                         @foreach ($reply as $item)
                             <tr>
                                 <td>{{$no}}</td>
-                                <td>{{$item->created_by}}</td>
+                                
+                                <td>{{$item->owner->name}}</td>
                                 <td>{{$item->review}}</td>
                             </tr>
                         @php

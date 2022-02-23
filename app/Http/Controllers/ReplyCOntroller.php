@@ -9,6 +9,6 @@ class ReplyCOntroller extends Controller
 {
     public function reply($code)
     {
-        return view('menu.management.reply',['reply' => React::where('content', $code)->with('reply')->get()]);
+        return view('menu.management.reply',['reply' => React::where('content', $code)->with(['reply','owner'])->get()]);
     }
 }

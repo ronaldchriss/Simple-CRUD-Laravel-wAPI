@@ -19,4 +19,9 @@ class Status extends Model
     {
         return $this->belongsTo(Content::class, 'id', 'relation');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

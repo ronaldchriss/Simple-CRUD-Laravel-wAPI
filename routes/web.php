@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\ContController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\ThemController;
 use App\Http\Controllers\ThemeController;
@@ -27,13 +28,8 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/dashboard', function () {
-    return view('menu.dashboard');
-})->name('dash');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dash');
 
-Route::get('/management/content', function () {
-    return view('menu.management.term');
-})->name('management.content');
 
 
 Route::post('upload/img',[CKEditorController::class, 'upload'])->name('ckeditor.upload');

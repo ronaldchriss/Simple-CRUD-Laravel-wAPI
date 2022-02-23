@@ -19,4 +19,9 @@ class React extends Model
         return $this->belongsTo(Content::class, 'content', 'id');
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
 }
