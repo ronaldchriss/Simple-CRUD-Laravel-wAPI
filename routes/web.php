@@ -35,7 +35,7 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::group(['middleware' => ['auth'],], function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dash');
-    xRoute::post('upload/img',[CKEditorController::class, 'upload'])->name('ckeditor.upload');
+    Route::post('upload/img',[CKEditorController::class, 'upload'])->name('ckeditor.upload');
     Route::prefix(hash('sha256','signalog').'-signalog')->group(function(){
         Route::resource('term', TermController::class, [
             'names' => [
