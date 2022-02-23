@@ -2,7 +2,7 @@
     <header class="header navbar navbar-expand-sm">
 
         <ul class="navbar-nav theme-brand flex-row  text-center">
-            
+
             <li class="nav-item theme-text">
                 <a href="index.html" class="nav-link">SIGNALOG</a>
             </li>
@@ -23,15 +23,15 @@
 
         <ul class="navbar-item flex-row navbar-dropdown">
             <li class="nav-item dropdown apps-dropdown more-dropdown md-hidden">
-                
+
             </li>
         </ul>
 
         <ul class="navbar-item flex-row search-ul">
-            
+
         </ul>
         <ul class="navbar-item flex-row navbar-dropdown">
-            
+
 
             <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
@@ -50,8 +50,8 @@
                         <div class="media mx-auto">
                             <img src="{{asset("assets/img/90x90.jpg")}}" class="img-fluid mr-2" alt="avatar">
                             <div class="media-body">
-                                <h5>Sonia Shaw</h5>
-                                <p>Project Leader</p>
+                                <h5>{{Str::ucfirst(Auth::user()->name)}}</h5>
+                                <p>Admin</p>
                             </div>
                         </div>
                     </div>
