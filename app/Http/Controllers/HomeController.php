@@ -41,8 +41,11 @@ class HomeController extends Controller
 
     protected function status()
     {
-        $status['gender'] = User::select('gender', DB::raw('COUNT(gender) as count'))
-                        ->groupBy('gender')->get();
+        $status['gender'] = DB::select("SELECT
+                        COUNT(CASE WHEN gender = 'man' THEN 1 ELSE NULL END) AS man,
+                        COUNT(CASE WHEN gender = 'woman' THEN 1 ELSE NULL END) AS woman
+                        FROM users
+                    ");
         $status['old'] = DB::select("SELECT
                     COUNT(CASE WHEN old BETWEEN 10 AND 15 THEN 1 ELSE NULL END) AS 'first',
                     COUNT(CASE WHEN old BETWEEN 15 AND 25 THEN 1 ELSE NULL END) AS second,

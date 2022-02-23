@@ -224,8 +224,8 @@
 
                     <div class="order-summary">
                         @php
-                            $man = $data['user']['gender']->where('gender','man')->first()->count;
-                            $woman = $data['user']['gender']->where('gender','woman')->first()->count;
+                            $man = $data['user']['gender'][0]->man;
+                            $woman = $data['user']['gender'][0]->woman;
                             $pman = $man/($man+$woman)*100;
                             $pwoman = $woman/($man+$woman)*100;
                         @endphp
