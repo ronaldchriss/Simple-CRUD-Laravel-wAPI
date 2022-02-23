@@ -28,8 +28,7 @@
                                 @foreach ($data['view']['view'] as $view)
                                 <tr>
                                     <td>
-                                        <div class="td-content customer-name"><img src="assets/img/90x90.jpg"
-                                                alt="avatar"><span>{{$view->title}}</span></div>
+                                        <div class="td-content customer-name"><span>{{$view->title}}</span></div>
                                     </td>
                                     <td>
                                         <div class="td-content product-brand text-primary">{{$view->view}}</div>
@@ -67,8 +66,7 @@
                                 @foreach ($data['view']['like'] as $view)
                                 <tr>
                                     <td>
-                                        <div class="td-content customer-name"><img src="assets/img/90x90.jpg"
-                                                alt="avatar"><span>{{$view->title}}</span></div>
+                                        <div class="td-content customer-name"><span>{{$view->title}}</span></div>
                                     </td>
                                     <td>
                                         <div class="td-content product-brand text-primary">{{$view->like}}</div>
@@ -107,8 +105,7 @@
                                 @foreach ($data['view']['dislike'] as $view)
                                 <tr>
                                     <td>
-                                        <div class="td-content customer-name"><img src="assets/img/90x90.jpg"
-                                                alt="avatar"><span>{{$view->title}}</span></div>
+                                        <div class="td-content customer-name"><span>{{$view->title}}</span></div>
                                     </td>
                                     <td>
                                         <div class="td-content product-brand text-primary">{{$view->dislike}}</div>
@@ -147,8 +144,7 @@
                                 @foreach ($data['location']['province'] as $loc)
                                 <tr>
                                     <td>
-                                        <div class="td-content customer-name"><img src="assets/img/90x90.jpg"
-                                                alt="avatar"><span>{{$loc->province}}</span></div>
+                                        <div class="td-content customer-name"><span>{{$loc->province}}</span></div>
                                     </td>
                                     <td>
                                         <div class="td-content product-brand text-primary">{{$loc->count}}</div>
@@ -187,8 +183,7 @@
                                 @foreach ($data['location']['city'] as $loc)
                                 <tr>
                                     <td>
-                                        <div class="td-content customer-name"><img src="assets/img/90x90.jpg"
-                                                alt="avatar"><span>{{$loc->city}}</span></div>
+                                        <div class="td-content customer-name"><span>{{$loc->city}}</span></div>
                                     </td>
                                     <td>
                                         <div class="td-content product-brand text-primary">{{$loc->count}}</div>

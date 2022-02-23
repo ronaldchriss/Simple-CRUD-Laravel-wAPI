@@ -31,11 +31,11 @@ class HomeController extends Controller
         $user['province'] = User::select('province', DB::raw('COUNT(province) as count'))
                         ->groupBy('province')
                         ->orderBy('count', 'desc')
-                        ->take(3)->get();
+                        ->limit(3)->where('role', '!=' ,'admin')->get();
         $user['city'] = User::select('city', DB::raw('COUNT(city) as count'))
                         ->groupBy('city')
                         ->orderBy('count', 'desc')
-                        ->take(3)->get();
+                        ->limit(3)->where('role', '!=' ,'admin')->get();
         return $user;
     }
 
