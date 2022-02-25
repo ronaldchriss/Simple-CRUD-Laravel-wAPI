@@ -114,10 +114,10 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputState">Image Theme</label>
-                        <input type="file" class="form-control" id="img_thm" placeholder="Image Theme" name="img_thm" required onchange="readURL(this);">
+                        <input type="file" class="form-control" id="img_thm" placeholder="Image Theme" name="img_thm" required onchange="previewIMG(this);">
                         <br>
                         <center>
-                            <img src="{{asset('assets/img/200x200.jpg')}}" id="img_preview" width="200px" height="200px" />
+                            <img src="{{asset('assets/img/200x200.jpg')}}" id="image_view" width="200px" height="200px" />
                         </center>
                         
                     </div>
@@ -139,12 +139,12 @@
 
 @section('script')
 <script>
-    function readURL(input) {
+    function previewIMG(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#img_preview').attr('src', e.target.result);
+                $('#image_view').attr('src', e.target.result);
             }
 
             reader.readAsDataURL(input.files[0]);

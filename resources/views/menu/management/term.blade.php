@@ -8,21 +8,21 @@
             <div class="widget-content widget-content-area br-6">
                 <div class="test row">
                     <div class="col-lg-6 text-left">
-                        <h5><b> Data Term Sign Language </b></h5>
+                        <h5><b> Data Petunjuk Bahasa Isyarat </b></h5>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#AddUser"
-                            data-whatever="@mdo">Add Term</a>
+                            data-whatever="@mdo">Tambah Petunjuk</a>
                     </div>
                 </div>
                 <table id="zero-config" class="table dt-table-hover" style="width:100%">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Title</th>
-                            <th>Desc</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
                             <th>Video</th>
-                            <th class="no-content">Actions</th>
+                            <th class="no-content">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                                 </a>
                                 <a class="btn btn-sm btn-danger mb-2" data-toggle="modal" data-target="#Delete{{$item->id}}"
                                     data-whatever="@mdo">
-                                    Delete
+                                    Hapus
                                 </a>
                             </td>
                         </tr>
@@ -54,7 +54,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Are you sure want delete this term ?</h5>
+                                        <h5 class="modal-title">Anda yakin menghapus data ini ?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -67,9 +67,9 @@
                                     </div>
                                     <div class="modal-footer md-button">
                                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                                            Cancel</button>
+                                            Batal</button>
                                             
-                                        <a href="{{route('term.destroy', $item->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('term.destroy', $item->id)}}" class="btn btn-danger">Hapus</a>
                                     </div>
                                     </form>
                                 </div>
@@ -95,7 +95,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Add Term</h5>
+                <h5 class="modal-title">Form Tambah Petunjuk Bahasa Isyarat</h5>
                 <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -109,11 +109,11 @@
                 <form action="{{route('term.make')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group mb-4">
-                        <label for="inputState">No Term</label>
+                        <label for="inputState">No Urut</label>
                         <input type="number" class="form-control" id="priority" placeholder="No" name="priority" required>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="inputState">Title Term</label>
+                        <label for="inputState">Judul</label>
                         <input type="text" class="form-control" id="title_trm" placeholder="Title Term" name="title_trm" required>
                     </div>
                     <div class="form-group mb-4">
@@ -125,13 +125,13 @@
                         </center>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="inputState">Description Term</label>
+                        <label for="inputState">Deksripsi</label>
                         <textarea class="form-control" name="desc_trm" id="konten"></textarea>
                     </div>
             </div>
             <div class="modal-footer md-button">
-                <a class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</a>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Hapus</a>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
             </form>
         </div>

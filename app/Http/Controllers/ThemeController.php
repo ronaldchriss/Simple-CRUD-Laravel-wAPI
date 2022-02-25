@@ -43,6 +43,7 @@ class ThemeController extends Controller
    
     public function update(Request $req, Theme $theme, $code)
     {
+        $flag = $theme->where('id', $code)->first()->flag;
         $status = "update";
         $theme = $this->make($req, $status, $code);
         if ($theme == 'error') {
@@ -50,14 +51,14 @@ class ThemeController extends Controller
             return back();
         }
         toast('Successfull Update Theme', 'success', 'bottom-right');
-        return redirect()->route('management.theme');
+        return redirect()->route('management.theme',$flag);
     }
 
 
     protected function make($req, $status, $code){
         if ($req->hasFile('img_thm')) {
             $name = rand().'.png';
-            $req->file('img_thm')->move(public_path('images'), $name);
+            $req->file('img_thm')->move('images', $name);
         }
         if (!$code) {
             $term = Theme::$status([
@@ -69,9 +70,13 @@ class ThemeController extends Controller
         }else{
             $term  = Theme::where('id',$code)->$status([
                 'title_thm' => $req->title_thm,
-                'img_thm' => $name,
                 'desc_thm' => $req->desc_thm,
             ]);
+            if ($req->hasFile('img_thm')){
+                $term  = Theme::where('id',$code)->$status([
+                'img_thm' => $name,
+            ]);
+            }
         }
         if (!$term ) {
             return response()->json([

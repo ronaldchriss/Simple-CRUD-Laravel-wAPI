@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="inputState">Image Theme</label>
-                            <input type="file" class="form-control" id="img_thm" placeholder="Image Theme" name="img_thm" required onchange="readURL(this);">
+                            <input type="file" class="form-control" id="img_thm" placeholder="Image Theme" name="img_thm" onchange="readURL(this);">
                             <br>
                             <center>
                                 <img src="{{asset('images/'.$theme->img_thm)}}" id="img_preview" width="200px" height="200px" />
@@ -31,7 +31,6 @@
                             <label for="inputState">Description Theme</label>
                             <textarea class="form-control" name="desc_thm" id="konten">{{$theme->desc_thm}}</textarea>
                         </div>
-                        @method('PUT')
                     </div>
                     <div class="modal-footer md-button">
                         <a class="btn" href="{{ url()->previous() }}"><i class="flaticon-cancel-12"></i> Discard</a>

@@ -8,7 +8,7 @@
             <div class="widget-content widget-content-area br-6">
                 <div class="test row">
                     <div class="col-lg-6 text-left">
-                        <h5><b> Data Reply {{Str::ucfirst($reply->first()->reply->title)}} </b></h5>
+                        <h5><b> Data Reply {{Str::ucfirst($title->title)}} </b></h5>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a class="btn btn-outline-danger" href="{{ url()->previous() }}">Back</a>

@@ -16,7 +16,7 @@ class ContentController extends Controller
     public function index($code)
     {
         $content = Content::with('themes')->where('theme', $code)->get();
-        $theme = Theme::get();
+        $theme = Theme::where('id', $code)->first();
         return view('menu.management.content', compact('content', 'theme'));
     }
 
@@ -112,14 +112,13 @@ class ContentController extends Controller
                 'title' => $req->title,
                 'video' => str_replace('watch?v=', 'embed/', $req->video),
                 'desc' => $req->desc,
-                'theme' => $req->theme
+                'theme' => $req->theme,
             ]);
         }else{
             $content = Content::where('id',$code)->$status([
                 'title' => $req->title,
                 'video' => str_replace('watch?v=', 'embed/', $req->video),
                 'desc' => $req->desc,
-                'theme' => $req->theme
             ]);
         }
         if (!$content) {

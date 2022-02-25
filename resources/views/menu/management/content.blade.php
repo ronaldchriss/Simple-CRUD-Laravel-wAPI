@@ -122,14 +122,7 @@
                         <label for="inputState">Title Content</label>
                         <input type="text" class="form-control" id="title" placeholder="Title Content" name="title" required>
                     </div>
-                    <div class="form-group mb-4">
-                        <label for="inputState">Theme Content</label>
-                        <select class="selectpicker form-control" data-live-search="true" title="Choose Theme" required name="theme" id="theme_content">
-                            @foreach ($theme as $theme)
-                                <option value="{{$theme->id}}">{{$theme->title_thm}}</option>
-                            @endforeach 
-                        </select>
-                    </div>
+                    <input type="hidden" class="form-control" id="id_theme" value="{{$theme->title}}" name="theme" required>
                     <div class="form-group mb-4">
                         <label for="inputState">Link Video</label>
                         <input type="text" class="form-control" id="video" placeholder="Link Video Content" name="video" required onchange="readURL(this);">

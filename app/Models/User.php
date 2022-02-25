@@ -59,4 +59,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    
+    public function react()
+    {
+        return $this->hasMany('App\Models\react', 'created_by','id');
+    }
+    public function status()
+    {
+        return $this->hasMany('App\Models\status', 'created_by','id');
+    }
 }
