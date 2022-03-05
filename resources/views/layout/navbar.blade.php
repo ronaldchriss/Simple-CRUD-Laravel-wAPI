@@ -4,7 +4,7 @@
         <ul class="navbar-nav theme-brand flex-row  text-center">
 
             <li class="nav-item theme-text">
-                <a href="index.html" class="nav-link">SIGNALOG</a>
+                <a href="index.html" class="nav-link">Signalong Indonesia</a>
             </li>
             <li class="nav-item toggle-sidebar">
                 <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg
@@ -63,7 +63,7 @@
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg> <span>Log Out</span>
+                            </svg> <span>Keluar</span>
                         </a>
                     </div>
                 </div>

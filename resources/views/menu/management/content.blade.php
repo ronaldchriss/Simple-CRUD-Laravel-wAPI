@@ -122,7 +122,7 @@
                         <label for="inputState">Title Content</label>
                         <input type="text" class="form-control" id="title" placeholder="Title Content" name="title" required>
                     </div>
-                    <input type="hidden" class="form-control" id="id_theme" value="{{$theme->title}}" name="theme" required>
+                    <input type="hidden" class="form-control" id="id_theme" value="{{$theme->id}}" name="theme" required>
                     <div class="form-group mb-4">
                         <label for="inputState">Link Video</label>
                         <input type="text" class="form-control" id="video" placeholder="Link Video Content" name="video" required onchange="readURL(this);">
