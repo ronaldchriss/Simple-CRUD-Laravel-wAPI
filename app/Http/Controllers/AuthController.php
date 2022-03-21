@@ -10,17 +10,18 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
     	//Validate data
-        $data = $request->only('name', 'email', 'password');
+        $data = $request->only('name', 'email', 'phone');
         $validator = Validator::make($data, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|max:50'
+            'phone' => 'required|string|unique:users'
         ]);
 
         //Send failed response if request is not valid
@@ -31,7 +32,14 @@ class AuthController extends Controller
         //Request is valid, create new user
         $user = User::create([
         	'name' => $request->name,
-        	'email' => $request->email,
+            'phone' => $request->phone,
+            'remember_token' => Str::random(8),
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'old' => $request->old,
+            'province' => $request->province,
+            'city' => $request->city,
+            'role' => "user",
         	'password' => bcrypt($this->password())
         ]);
 
@@ -50,21 +58,22 @@ class AuthController extends Controller
                 'password' => $this->password(),
             ]);
         }
+        $email = User::where('phone', $request->phone)->first()->email;
+        $request->merge([
+            'email' => $email,
+        ]);
+        
         $credentials = $request->only('email', 'password');
 
-        //valid credential
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        //Send failed response if request is not valid
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()], 200);
         }
 
-        //Request is validated
-        //Crean token
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json([
@@ -80,7 +89,7 @@ class AuthController extends Controller
                 ], 500);
         }
  	
- 		//Token created, return with success response and jwt token
+ 		User::where('email', $req->email)->update(['status' => 1]);
         return response()->json([
             'success' => true,
             'token' => $token,

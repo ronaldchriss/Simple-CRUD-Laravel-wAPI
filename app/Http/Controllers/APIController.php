@@ -14,12 +14,13 @@ class APIController extends Controller
 {
     protected function list_term(){
         $data = Term::get();
-        return response()->json($data);
+        return response()->json(["listterms"=>$data]);
     }
 
     protected function list_theme(){
-        $data = Theme::get();
-        return response()->json($data);
+        $relation=["contents"];
+        $data = Theme::with($relation)->get();
+        return response()->json(["listtheme"=>$data]);
     }
 
     protected function list_content($theme){
