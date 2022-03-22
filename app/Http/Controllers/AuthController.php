@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+use Session;
 
 class AuthController extends Controller
 {
@@ -112,6 +113,10 @@ class AuthController extends Controller
         }
  	
  		User::where('email', $email->email)->update(['status' => 1]);
+ 		
+        //  $request->session()->put('mail', $email->email);
+ 		
+        Session::put('mail', $email->email);
         return response()->json([
             'success' => true,
             'token' => $token,
@@ -120,7 +125,8 @@ class AuthController extends Controller
     }
  
     public function logout(Request $request)
-    {      
+    {
+        User::where('email', Session::get('mail'))->update(['status' => 0]);
         try {
             JWTAuth::invalidate(JWTAuth::getToken());
  
@@ -134,6 +140,7 @@ class AuthController extends Controller
                 'message' => 'Sorry, user cannot be logged out'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        
     }
 
     public function postlogin(Request $req)
