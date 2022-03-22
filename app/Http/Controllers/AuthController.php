@@ -20,7 +20,7 @@ class AuthController extends Controller
         $data = $request->only('name', 'email', 'phone');
         $validator = Validator::make($data, [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'phone' => 'required|string|unique:users'
         ]);
 
@@ -40,14 +40,31 @@ class AuthController extends Controller
             'province' => $request->province,
             'city' => $request->city,
             'role' => "user",
-        	'password' => bcrypt($this->password())
+        	'password' => bcrypt("password")
         ]);
+        
+        $credentials = ["email"=>$user->email,"password"=>"password"];
+        
+         try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                	'success' => false,
+                	'message' => 'Login credentials are invalid.',
+                ], 400);
+            }
+        } catch (JWTException $e) {
+    	return $credentials;
+            return response()->json([
+                	'success' => false,
+                	'message' => 'Could not create token.',
+                ], 500);
+        }
 
         //User created, return success response
         return response()->json([
             'success' => true,
-            'message' => 'User created successfully',
-            'data' => $user
+            'token' => $token,
+            'user' => $user
         ], Response::HTTP_OK);
     }
  
@@ -58,9 +75,14 @@ class AuthController extends Controller
                 'password' => $this->password(),
             ]);
         }
-        $email = User::where('phone', $request->phone)->first()->email;
+        $email = User::where('phone', $request->phone)->first();
+        if(!$email){
+            return response()->json([
+            	'success' => false,
+            ], 400);
+        }
         $request->merge([
-            'email' => $email,
+            'email' => $email->email,
         ]);
         
         $credentials = $request->only('email', 'password');
@@ -71,7 +93,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
+            return response()->json(['error' => $validator->messages()], 400);
         }
 
         try {
@@ -89,10 +111,11 @@ class AuthController extends Controller
                 ], 500);
         }
  	
- 		User::where('email', $req->email)->update(['status' => 1]);
+ 		User::where('email', $email->email)->update(['status' => 1]);
         return response()->json([
             'success' => true,
             'token' => $token,
+            'user'=>$email,
         ]);
     }
  

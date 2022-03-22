@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index($code)
     {
         $content = Content::with('themes')->where('theme', $code)->get();
@@ -20,22 +16,12 @@ class ContentController extends Controller
         return view('menu.management.content', compact('content', 'theme'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $req)
     {
         $term = "";
@@ -49,12 +35,6 @@ class ContentController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function show(Content $content, $code)
     {
         $content::where('id', $code)->delete();
@@ -62,29 +42,20 @@ class ContentController extends Controller
         return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Content $content, $code)
     {
         $content = Content::with('themes')->where('id', $code)->first();
 
-        $theme = Theme::get();
+        $flag = Theme::where('id', $content->theme)->first();
+        $theme = Theme::where('flag', $flag->flag)->get();
+        
         return view('menu.management.content-edit', compact('content', 'theme'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $req, Content $content, $code)
     {
+        $content = Content::where('id', $code)->first();
+        $theme = $content->theme;
         $status = "update";
         $content = $this->make($req, $status, $code);
         if ($content == 'error') {
@@ -92,15 +63,10 @@ class ContentController extends Controller
             return back();
         }
         toast('Successfull Update Content', 'success', 'bottom-right');
-        return redirect()->route('management.content');
+        return redirect()->route('management.content',$theme);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Content  $content
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Content $content)
     {
         //

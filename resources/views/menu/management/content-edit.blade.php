@@ -22,9 +22,14 @@
                         <div class="form-group mb-4">
                             <label for="inputState">Theme Content</label>
                             <select class="selectpicker form-control" data-live-search="true" required name="theme" id="theme_content">
-                                <option value="{{$content->theme}}">{{$content->themes->title_thm}}</option>
+                                <!--<option value="{{$content->theme}}">{{$content->themes->title_thm}}</option>-->
                                 @foreach ($theme as $theme)
-                                    <option value="{{$theme->id}}">{{$theme->title_thm}}</option>
+                                    @if($content->theme == $theme->id)
+                                        <option selected value="{{$theme->id}}">{{$theme->title_thm}}</option>
+                                    @else
+                                        <option value="{{$theme->id}}">{{$theme->title_thm}}</option>
+                                    @endif
+                                    
                                 @endforeach 
                             </select>
                         </div>
@@ -40,7 +45,6 @@
                             <label for="inputState">Description Content</label>
                             <textarea class="form-control" name="desc" id="konten">{{$content->desc}}</textarea>
                         </div>
-                        @method('PUT')
                     </div>
                     <div class="modal-footer md-button">
                         <a class="btn" href="{{ url()->previous() }}"><i class="flaticon-cancel-12"></i> Discard</a>
